@@ -61,14 +61,5 @@ function allWagesFor (recordObj) {
 }
 
 function calculatePayroll (employeeRecordsArray) {
-    //console.log('employeeArray', employeeRecordsArray)
-    const timeIn = employeeRecordsArray.map(element => {
-        //console.log('employeeInfoTimeIn', element.timeInEvents)
-        for (let i = 0; i < element.timeInEvents.length; i++) {
-            console.log('element.timeInEvents[i]',element.timeInEvents[i].date)
-            return element.timeInEvents[i].date.reduce((previousValue, currentValue) => {
-                return previousValue + wagesEarnedOnDate(employeeRecordsArray, currentValue)
-            }, 0)
-        }
-    })
+    return employeeRecordsArray.map(employee => allWagesFor(employee)).reduce((currentValue, total) => currentValue + total)
 }
